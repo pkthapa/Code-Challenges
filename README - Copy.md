@@ -1,2 +1,0 @@
-# CodeWars
-Coding challenges repository.
