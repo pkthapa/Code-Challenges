@@ -1,1 +1,3 @@
-## Coding Challenges
+# CodeWars
+
+A coding challenges repository.
