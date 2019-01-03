@@ -18,6 +18,7 @@ class Node
 class Solution{
 public:
 	Node* removeDuplicates(Node *head){
+		#if 0
 		if(!head){
 			return head;
 		}
@@ -30,6 +31,28 @@ public:
 			}
 			else{
 				node = node->next;
+			}
+		}
+		return head;
+		#endif
+		
+		Node *temp = head, *prevNode = head;
+		vector<int> v;
+		vector<int>::iterator itr = v.begin();
+		
+		if(NULL == head){return head;}
+
+		while(NULL != temp){
+			itr = find(v.begin(), v.end(), temp->data);
+			if(itr != v.end()){//Found.
+				prevNode->next = temp->next;
+				delete temp;
+				temp = prevNode->next;
+			}
+			else{
+				v.push_back(temp->data);
+				prevNode = temp;
+				temp = temp->next;
 			}
 		}
 		return head;
