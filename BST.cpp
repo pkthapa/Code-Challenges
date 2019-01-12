@@ -22,33 +22,30 @@ void BST :: PreOrder(BST *node){
     if(!node){
         return;
     }
-    if(node){
-        cout<<node->data<<" ";
-        PreOrder(node->prev);
-        PreOrder(node->next);
-    }
+
+	cout<<node->data<<" ";
+	PreOrder(node->prev);
+	PreOrder(node->next);
 }
 
 void BST :: PostOrder(BST *node){
     if(!node){
         return;
     }
-    if(node){
-        PostOrder(node->prev);
-        PostOrder(node->next);
-        cout<<node->data<<" ";
-    }
+
+	PostOrder(node->prev);
+	PostOrder(node->next);
+	cout<<node->data<<" ";
 }
 
 void BST :: InOrder(BST *node){
     if(!node){
         return;
     }
-    if(node){
-        InOrder(node->prev);
-        cout<<node->data<<" ";
-        InOrder(node->next);
-    }
+
+	InOrder(node->prev);
+	cout<<node->data<<" ";
+	InOrder(node->next);
 }
 
 int BST :: MaxDepth(BST *node){
