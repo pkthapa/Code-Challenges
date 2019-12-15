@@ -1,0 +1,74 @@
+#include "Vector.h"
+///////////////////////////////////////////////////////////////////////////
+Vector::Vector():data(NULL), vSize(0), vCapacity(0){}
+///////////////////////////////////////////////////////////////////////////
+Vector::~Vector(){ delete[] data; }
+///////////////////////////////////////////////////////////////////////////
+void Vector::PushBack(int val)
+{
+    if(vSize == vCapacity)
+    {
+        if(vCapacity == 0)
+        {
+            Reserve(1);
+        }
+        else
+        {
+            Reserve(2 * vCapacity);
+        }
+    }
+    data[vSize] = val;
+    vSize++;
+}
+///////////////////////////////////////////////////////////////////////////
+void Vector::PopBack()
+{
+    vSize--;
+}
+///////////////////////////////////////////////////////////////////////////
+int Vector::Size() const{ return vSize; }
+///////////////////////////////////////////////////////////////////////////
+int Vector::Capacity() const{ return vCapacity; }
+///////////////////////////////////////////////////////////////////////////
+void Vector::Reserve(int newCapacity)
+{
+    int *newData;
+    try
+    {
+        newData = new int[newCapacity];
+    }
+    catch(...){
+        cout << "Memory allocation failure...";
+    }
+
+    for(int i = 0; i < vSize; i++)
+    {
+        newData[i] = data[i];
+    }
+    delete[] data;
+
+    data = newData;
+    vCapacity = newCapacity;
+}
+///////////////////////////////////////////////////////////////////////////
+bool Vector::Empty() const
+{
+    return (vSize == 0);
+}
+///////////////////////////////////////////////////////////////////////////
+void Vector::Clear()
+{
+    vSize = 0;
+    vCapacity = 0;
+
+    if(data)
+    {
+        delete[] data;
+        data = nullptr;
+    }
+}
+///////////////////////////////////////////////////////////////////////////
+int& Vector::operator[](const int& offset)
+{
+    return data[offset];
+}
