@@ -8,6 +8,7 @@ class Vector
 public:
     Vector();
     ~Vector();
+    typedef T* Iterator;
     void PushBack(const T&);
     void PopBack();
     int Size() const;
@@ -15,8 +16,22 @@ public:
     void Reserve(const int&);
     bool Empty() const;
     void Clear();
+    Iterator Begin() const;
+    Iterator End() const;
     T& operator[](const int&);
 };
+///////////////////////////////////////////////////////////////////////////
+template <class T>
+typename Vector<T>::Iterator Vector<T>::Begin() const
+{
+    return data;
+}
+///////////////////////////////////////////////////////////////////////////
+template <class T>
+typename Vector<T>::Iterator Vector<T>::End() const
+{
+    return data + Size();
+}
 ///////////////////////////////////////////////////////////////////////////
 template <class T>
 Vector<T>::Vector(){
