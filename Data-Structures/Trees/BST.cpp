@@ -16,7 +16,7 @@ public:
     void CreateMirror(BST *);
     void PrintLevelOrder(BST *);//!! BFS traversal.
     void PrintBFS(BST *, int);//!! BFS printing during traversing.
-	BST *Insert(BST *, int);
+    BST *Insert(BST *, int);
 };
 //-----------
 BST *BST :: Insert(BST *node, int value)

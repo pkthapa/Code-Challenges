@@ -5,6 +5,21 @@ class Shared_ptr
 {
     T *p;
     int *refCount = nullptr; // For ease to maintain the count between different Shared_ptr objects.
+    /*
+    Why refCount is not static type?
+
+    A static variable is a kind of global variable. Meaning, if a static variable is defined in a class that means this variable is shared among all objects of that class, irrespective of whether all objects are linked or not.
+
+    shared_ptr<int> sp1(new int);
+    shared_ptr<int> sp2(sp1);
+
+    Here, sp1 & sp2 will have a refCount = 2, because sp1 and sp2 are linked.
+
+    shared_ptr<int> sp3(new int);
+
+    If refCount were static, then the refCount of sp3 would have been 3.
+    The expected value of sp3's refCount is 1 because sp3 is not linked to neither sp1 nor sp2.
+    */
 
 public:
     Shared_ptr() : p(nullptr), refCount(new int(1))
