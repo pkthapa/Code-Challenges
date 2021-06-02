@@ -3,9 +3,9 @@
 char ch = 'A';
 void resetA()
 {
-    if (ch > 90)
+    if (ch > 'Z')
     {
-        ch = 65;
+        ch = 'A';
     }
 }
 
@@ -16,7 +16,6 @@ void printPyramid(int n)
         for (int j = n; j > i; --j)
         {
             cout << " ";
-            resetA();
         }
 
         for (int k = 1; k <= i; ++k)
@@ -42,10 +41,17 @@ int main()
     printPyramid(i);
     return 0;
 }
+
 /*
-    A
-   ABA
-  ABCBA
- ABCDCBA
-ABCDEDCBA
+Output:
+         A
+        BCD
+       EFGHI
+      JKLMNOP
+     QRSTUVWXY
+    ZABCDEFGHIJ
+   KLMNOPQRSTUVW
+  XYZABCDEFGHIJKL
+ MNOPQRSTUVWXYZABC
+DEFGHIJKLMNOPQRSTUV
 */
