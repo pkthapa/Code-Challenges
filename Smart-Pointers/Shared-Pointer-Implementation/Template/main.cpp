@@ -22,9 +22,15 @@ class Shared_ptr
     */
 
 public:
-    Shared_ptr() : p(nullptr), refCount(new int(1))
+    Shared_ptr() : p(nullptr), refCount(new int(0))
+    {}
+
+    Shared_ptr(T* temp) : p(temp), refCount(new int(0))
     {
-        p = new int;
+        if (nullptr != temp)
+        {
+            ++(*this->refCount);
+        }
     }
 
     // Shallow copy: Copy constructor
@@ -41,8 +47,13 @@ public:
     }
 
     // Shallow copy: Copy assignment
+    // Reference by reference is a must here. If return by value, then copy constructor will be called.
     Shared_ptr& operator=(const Shared_ptr& obj)
     {
+        // Clean existing objects.
+        delete this->p;
+        delete this->refCount;
+
         this->p = obj.p;
         this->refCount = obj.refCount;
 
@@ -119,21 +130,31 @@ private:
 
 int main()
 {
-    Shared_ptr<int> sp;
+    Shared_ptr<int> sp(new int);
     cout << sp.get() << " " << sp.use_count() << endl;
 
     *sp = 2;
 
     Shared_ptr<int> sp1 = sp;
-    
+    cout << sp.get() << " " << sp.use_count() << endl;
     {
         Shared_ptr<int> sp2 = sp;
-        cout << sp1.get() << " " << sp1.use_count() << endl;
+        cout << sp.get() << " " << sp.use_count() << endl;
     }
-    cout << sp1.get() << " " << sp1.use_count() << endl;
+    cout << sp.get() << " " << sp.use_count() << endl;
     Shared_ptr<int> sp3 = sp1;
-    cout << sp1.get() << " " << sp1.use_count() << endl;
+    cout << sp.get() << " " << sp.use_count() << endl;
 
     cout << "print:" << *sp3 << endl;
     return 0;
 }
+
+/*
+Output:
+0x7fffd4724eb0 1
+0x7fffd4724eb0 2
+0x7fffd4724eb0 3
+0x7fffd4724eb0 2
+0x7fffd4724eb0 3
+print:2
+*/
